@@ -8,11 +8,13 @@
 #ifndef INC_GLOBAL_H_
 #define INC_GLOBAL_H_
 
+#include "main.h"
 #include "stm32f4xx_hal.h"
+#include "gpio.h"
+#include "spi.h"
+#include "dma.h"
+#include "Peripherals/NRF24.h"
 
-uint8_t NRF24_TxBuffer[32];
-
-uint8_t NRF24_RxBuffer[32];
 
 typedef union{
 	int32_t s32;

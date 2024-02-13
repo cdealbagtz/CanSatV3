@@ -1,0 +1,6 @@
+../Core/Src/Peripherals/NRF24.c:26:6:NRF24_WriteRegister	1
+../Core/Src/Peripherals/NRF24.c:36:6:NRF24_WriteMultiRegister	1
+../Core/Src/Peripherals/NRF24.c:46:9:NRF24_ReadRegister	1
+../Core/Src/Peripherals/NRF24.c:55:6:nrfsendCmd	1
+../Core/Src/Peripherals/NRF24.c:64:6:HAL_SPI_TxCpltCallback	1
+../Core/Src/Peripherals/NRF24.c:69:6:HAL_SPI_RxCpltCallback	1
