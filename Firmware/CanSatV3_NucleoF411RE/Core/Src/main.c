@@ -45,7 +45,8 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-uint8_t RxBuffer;
+uint8_t NRF24_TxStruct[32];
+uint8_t NRF24_RxStruct[32];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -90,7 +91,8 @@ int main(void)
   MX_DMA_Init();
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
-  RxBuffer = NRF24_ReadRegister(0);
+  NRF24_RxConfig();
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -98,7 +100,8 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+	  NRF24_Receive(NRF24_TxStruct);
+	  HAL_Delay(100);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

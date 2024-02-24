@@ -9,13 +9,28 @@
 
 
 #ifndef INC_PERIPHERALS_NRF24_H_
-#define INC_PERIPHERALS_NRF24_H_
+#define INC_PERIPHERALS_NRF24_H_z
 
 uint8_t NRF24_ReadRegister(uint8_t Reg);
+void NRF24_WriteRegister(uint8_t Reg, uint8_t config);
+void NRF24_TxConfig(void);
+void NRF24_ResetConfig(void);
+void NRF24_RxConfig(void);
 
-void NRF24_ReadMultiRegister(uint8_t Reg, uint8_t *RxBuffer, uint8_t size);
+void NRF24_transmit(uint8_t *data);
+void NRF24_Receive (uint8_t *data);
 
-/* Memory Map */
+
+void NRF24_ReadMultiRegister(uint8_t Reg, uint8_t *config, uint8_t size);
+
+/*Configuracion del CanSat*/
+#define CanSat_Ch   0x05
+#define CanSat_ADDR 0x00CA45A7
+
+
+
+
+/* Direcciones de memoria */
 #define CONFIG      0x00
 #define EN_AA       0x01
 #define EN_RXADDR   0x02
@@ -43,7 +58,7 @@ void NRF24_ReadMultiRegister(uint8_t Reg, uint8_t *RxBuffer, uint8_t size);
 #define DYNPD	    0x1C
 #define FEATURE	    0x1D
 
-/* Instruction Mnemonics */
+/* Comandos */
 #define R_REGISTER    0x00
 #define W_REGISTER    0x20
 #define REGISTER_MASK 0x1F

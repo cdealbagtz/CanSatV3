@@ -8,6 +8,7 @@
 #ifndef INC_GLOBAL_H_
 #define INC_GLOBAL_H_
 
+
 #include "main.h"
 #include "stm32f4xx_hal.h"
 #include "gpio.h"
@@ -57,7 +58,6 @@ typedef struct{
 	uint8_t ack;
 	uint8_t end;
 }cansat_data_t;
-
 
 
 #endif /* INC_GLOBAL_H_ */
