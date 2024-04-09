@@ -1,0 +1,6 @@
+../Core/Src/Global/Task_schedule.c:14:6:task_init_10ms	1
+../Core/Src/Global/Task_schedule.c:22:6:task_10ms	1
+../Core/Src/Global/Task_schedule.c:30:6:task_init_100ms	1
+../Core/Src/Global/Task_schedule.c:38:6:task_100ms	1
+../Core/Src/Global/Task_schedule.c:46:6:task_init_1000ms	1
+../Core/Src/Global/Task_schedule.c:54:6:task_1000ms	1
