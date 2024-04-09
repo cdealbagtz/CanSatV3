@@ -1,0 +1,8 @@
+../Core/Src/Peripheral/NRF24.c:14:6:NRF24_write	1
+../Core/Src/Peripheral/NRF24.c:22:6:NRF24_Addr_write	1
+../Core/Src/Peripheral/NRF24.c:38:9:NRF24_read	1
+../Core/Src/Peripheral/NRF24.c:47:6:NRF24_Addr_read	6
+../Core/Src/Peripheral/NRF24.c:80:6:NRF24_DefaultConfiguration	1
+../Core/Src/Peripheral/NRF24.c:121:6:NRF24_ActualConfiguration	1
+../Core/Src/Peripheral/NRF24.c:150:6:NRF24_config	1
+../Core/Src/Peripheral/NRF24.c:183:6:NRF24_init	1

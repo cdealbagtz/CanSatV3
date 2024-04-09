@@ -7,6 +7,8 @@
 
 #include "Global/Task_schedule.h"
 
+uint8_t test;
+
 /**
   * @fn  	task_init_10ms
   * @brief  Inicializaciones para tarea de 10 milisegundos

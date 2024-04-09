@@ -44,7 +44,9 @@ Core/Src/freertos.o: ../Core/Src/freertos.c \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h \
- ../Core/Inc/Global/Task_schedule.h
+ ../Core/Inc/Global/Task_schedule.h ../Core/Inc/Peripheral/NRF24.h \
+ ../Core/Inc/Global/Global_definitions.h ../Core/Inc/spi.h \
+ ../Core/Inc/main.h ../Core/Inc/dma.h ../Core/Inc/gpio.h
 ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h:
 ../Core/Inc/FreeRTOSConfig.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h:
@@ -92,3 +94,9 @@ Core/Src/freertos.o: ../Core/Src/freertos.c \
 ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h:
 ../Core/Inc/Global/Task_schedule.h:
+../Core/Inc/Peripheral/NRF24.h:
+../Core/Inc/Global/Global_definitions.h:
+../Core/Inc/spi.h:
+../Core/Inc/main.h:
+../Core/Inc/dma.h:
+../Core/Inc/gpio.h:
