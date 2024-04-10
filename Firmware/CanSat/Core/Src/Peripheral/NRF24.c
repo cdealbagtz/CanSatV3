@@ -8,7 +8,7 @@
 #include "Peripheral/NRF24.h"
 
 NRF24_Config_t NRF24_Configurations_Struct;
-
+uint8_t test[32]={"Hola mundo."};
 
 
 void NRF24_write(uint8_t Adr, uint8_t data){
@@ -88,23 +88,23 @@ void NRF24_DefaultConfiguration(void){
 	NRF24_Configurations_Struct.Default.SETUP_RETR 		= 0x00;
 	NRF24_Configurations_Struct.Default.RF_CH  			= 0x02;
 	NRF24_Configurations_Struct.Default.RF_SETUP  		= 0x0F;
-	NRF24_Configurations_Struct.Default.STATUS  			= 0X0E;
+	NRF24_Configurations_Struct.Default.STATUS  		= 0X0E;
 	NRF24_Configurations_Struct.Default.OBSERVE  		= 0X00;
-	NRF24_Configurations_Struct.Default.CD  				= 0x00;
-	NRF24_Configurations_Struct.Default.RX_ADDR_P0[0]   	= 0xE7;
-	NRF24_Configurations_Struct.Default.RX_ADDR_P0[1]   	= 0xE7;
-	NRF24_Configurations_Struct.Default.RX_ADDR_P0[2]   	= 0xE7;
-	NRF24_Configurations_Struct.Default.RX_ADDR_P0[3]   	= 0xE7;
-	NRF24_Configurations_Struct.Default.RX_ADDR_P0[4]   	= 0xE7;
-	NRF24_Configurations_Struct.Default.RX_ADDR_P1[0]   	= 0xC2;
-	NRF24_Configurations_Struct.Default.RX_ADDR_P1[1]   	= 0xC2;
-	NRF24_Configurations_Struct.Default.RX_ADDR_P1[2]   	= 0xC2;
-	NRF24_Configurations_Struct.Default.RX_ADDR_P1[3]   	= 0xC2;
-	NRF24_Configurations_Struct.Default.RX_ADDR_P1[4]   	= 0xC2;
-	NRF24_Configurations_Struct.Default.RX_ADDR_P2  		= 0xC3;
+	NRF24_Configurations_Struct.Default.CD  			= 0x00;
+	NRF24_Configurations_Struct.Default.RX_ADDR_P0[0]  	= 0xE7;
+	NRF24_Configurations_Struct.Default.RX_ADDR_P0[1]  	= 0xE7;
+	NRF24_Configurations_Struct.Default.RX_ADDR_P0[2]  	= 0xE7;
+	NRF24_Configurations_Struct.Default.RX_ADDR_P0[3]  	= 0xE7;
+	NRF24_Configurations_Struct.Default.RX_ADDR_P0[4]  	= 0xE7;
+	NRF24_Configurations_Struct.Default.RX_ADDR_P1[0]  	= 0xC2;
+	NRF24_Configurations_Struct.Default.RX_ADDR_P1[1]  	= 0xC2;
+	NRF24_Configurations_Struct.Default.RX_ADDR_P1[2]  	= 0xC2;
+	NRF24_Configurations_Struct.Default.RX_ADDR_P1[3]  	= 0xC2;
+	NRF24_Configurations_Struct.Default.RX_ADDR_P1[4]  	= 0xC2;
+	NRF24_Configurations_Struct.Default.RX_ADDR_P2  	= 0xC3;
 	NRF24_Configurations_Struct.Default.RX_ADDR_P3 		= 0xC4;
-	NRF24_Configurations_Struct.Default.RX_ADDR_P4  		= 0xC5;
-	NRF24_Configurations_Struct.Default.RX_ADDR_P5  		= 0xC6;
+	NRF24_Configurations_Struct.Default.RX_ADDR_P4  	= 0xC5;
+	NRF24_Configurations_Struct.Default.RX_ADDR_P5  	= 0xC6;
 	NRF24_Configurations_Struct.Default.TX_ADDR[0]   	= 0xE7;
 	NRF24_Configurations_Struct.Default.TX_ADDR[1]   	= 0xE7;
 	NRF24_Configurations_Struct.Default.TX_ADDR[2]   	= 0xE7;
@@ -151,9 +151,7 @@ void NRF24_ActualConfiguration(void){
 }
 
 void NRF24_config(NRF24_Address_Configurations_t Configuration_struct){
-	uint8_t buffer[5] = {0};
-	buffer[0] = Configuration_struct.CONFIG;
-	NRF24_write(CONFIG,	buffer[0]);
+	NRF24_write(CONFIG,	Configuration_struct.CONFIG);
 	NRF24_write(EN_AA, Configuration_struct.EN_AA);
 	NRF24_write(EN_RXADDR,Configuration_struct.EN_RXADDR);
 	NRF24_write(SETUP_AW,Configuration_struct.SETUP_AW);
@@ -163,32 +161,13 @@ void NRF24_config(NRF24_Address_Configurations_t Configuration_struct){
 	NRF24_write(STATUS,Configuration_struct.STATUS);
 	NRF24_write(OBSERVE,Configuration_struct.OBSERVE);
 	NRF24_write(CD,Configuration_struct.CD);
-	uint8_t RX_ADDR_P0_ADDRESS[5];
-	uint8_t RX_ADDR_P1_ADDRESS[5];
-	uint8_t TX_ADDR_ADDRESS[5];
-
-	RX_ADDR_P0_ADDRESS[4]=Configuration_struct.RX_ADDR_P0[0];
-	RX_ADDR_P0_ADDRESS[3]=Configuration_struct.RX_ADDR_P0[1];
-	RX_ADDR_P0_ADDRESS[2]=Configuration_struct.RX_ADDR_P0[2];
-	RX_ADDR_P0_ADDRESS[1]=Configuration_struct.RX_ADDR_P0[3];
-	RX_ADDR_P0_ADDRESS[0]=Configuration_struct.RX_ADDR_P0[4];
-	NRF24_Addr_write(RX_ADDR_P0, RX_ADDR_P0_ADDRESS);
-	RX_ADDR_P1_ADDRESS[4]=Configuration_struct.RX_ADDR_P1[0];
-	RX_ADDR_P1_ADDRESS[3]=Configuration_struct.RX_ADDR_P1[1];
-	RX_ADDR_P1_ADDRESS[2]=Configuration_struct.RX_ADDR_P1[2];
-	RX_ADDR_P1_ADDRESS[1]=Configuration_struct.RX_ADDR_P1[3];
-	RX_ADDR_P1_ADDRESS[0]=Configuration_struct.RX_ADDR_P1[4];
-	NRF24_Addr_write(RX_ADDR_P1, RX_ADDR_P1_ADDRESS);
+	NRF24_Addr_write(RX_ADDR_P0, Configuration_struct.RX_ADDR_P0);
+	NRF24_Addr_write(RX_ADDR_P1, Configuration_struct.RX_ADDR_P1);
 	NRF24_write(RX_ADDR_P2,Configuration_struct.RX_ADDR_P2);
 	NRF24_write(RX_ADDR_P3,Configuration_struct.RX_ADDR_P3);
 	NRF24_write(RX_ADDR_P4,Configuration_struct.RX_ADDR_P4);
 	NRF24_write(RX_ADDR_P5,Configuration_struct.RX_ADDR_P5);
-	TX_ADDR_ADDRESS[4]=Configuration_struct.TX_ADDR[0];
-	TX_ADDR_ADDRESS[3]=Configuration_struct.TX_ADDR[1];
-	TX_ADDR_ADDRESS[2]=Configuration_struct.TX_ADDR[2];
-	TX_ADDR_ADDRESS[1]=Configuration_struct.TX_ADDR[3];
-	TX_ADDR_ADDRESS[0]=Configuration_struct.TX_ADDR[4];
-	NRF24_Addr_write(TX_ADDR, TX_ADDR_ADDRESS);
+	NRF24_Addr_write(TX_ADDR, Configuration_struct.TX_ADDR);
 	NRF24_write(RX_PW_P0,Configuration_struct.RX_PW_P0);
 	NRF24_write(RX_PW_P1,Configuration_struct.RX_PW_P1);
 	NRF24_write(RX_PW_P2,Configuration_struct.RX_PW_P2);
@@ -199,10 +178,34 @@ void NRF24_config(NRF24_Address_Configurations_t Configuration_struct){
 	NRF24_write(DYNPD,Configuration_struct.DYNPD);
 	NRF24_write(FEATURE,Configuration_struct.FEATURE);
 }
+
+void NRF24_FIFO_write(uint8_t *pData){
+	uint8_t Adr = W_TX_PAYLOAD;
+	NRF24_select();
+	HAL_SPI_Transmit_DMA(SPI_NRF24, &Adr, 1);
+	for (uint8_t n = 0; n < 32; ++n) {
+		HAL_SPI_Transmit_DMA(SPI_NRF24, &pData[n], 1);
+	}
+	NRF24_unselect();
+	test[12]+=1;                    //Variable para purebas, eliminar despues
+}
+
+void NRF24_FlushTxFIFO(void){
+	uint8_t Adr = FLUSH_TX;
+	NRF24_select();
+	HAL_SPI_Transmit_DMA(SPI_NRF24, &Adr, 1);
+	NRF24_unselect();
+}
+
+void NRF24_loadStructures(void){
+	NRF24_DefaultConfiguration();
+}
 void NRF24_init(void){
 	NRF24_Disable();
 	NRF24_unselect();
-	NRF24_DefaultConfiguration();
+	NRF24_loadStructures();
+	NRF24_FlushTxFIFO();
 	NRF24_config(NRF24_Configurations_Struct.Default);
+
 	NRF24_ActualConfiguration();
 }

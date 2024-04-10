@@ -7,7 +7,7 @@
 
 #include "Global/Task_schedule.h"
 
-uint8_t test;
+extern uint8_t test[32];
 
 /**
   * @fn  	task_init_10ms
@@ -38,6 +38,7 @@ void task_init_100ms(void){
   * @brief  Ejecucion de tareas de 100 milisegundos
   */
 void task_100ms(void){
+
 
 }
 
