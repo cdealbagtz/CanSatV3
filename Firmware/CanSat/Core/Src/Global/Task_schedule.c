@@ -7,8 +7,6 @@
 
 #include "Global/Task_schedule.h"
 
-extern uint8_t test[32];
-
 /**
   * @fn  	task_init_10ms
   * @brief  Inicializaciones para tarea de 10 milisegundos
@@ -22,7 +20,7 @@ void task_init_10ms(void){
   * @brief  Ejecucion de tareas de 10 milisegundos
   */
 void task_10ms(void){
-
+	//NRF24_PackageAvailable();
 }
 
 /**
@@ -30,7 +28,9 @@ void task_10ms(void){
   * @brief  Inicializaciones para tarea de 100 milisegundos
   */
 void task_init_100ms(void){
-
+	//NRF24_RxMode(PIPE0_Addres, NRF24_Cannel);
+	NRF24_TxMode(PIPE0_Addres, NRF24_Cannel);
+	NRF24_ActualConfiguration();
 }
 
 /**
@@ -38,8 +38,7 @@ void task_init_100ms(void){
   * @brief  Ejecucion de tareas de 100 milisegundos
   */
 void task_100ms(void){
-
-
+	NRF24_Transmit(test);
 }
 
 /**

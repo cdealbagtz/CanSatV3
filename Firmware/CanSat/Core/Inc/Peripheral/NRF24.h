@@ -88,9 +88,14 @@ enum NRF24_ADDRESS{
 
 
 
-uint8_t NRF24_read(uint8_t Adr);
-void NRF24_write(uint8_t Adr, uint8_t data);
-void NRF24_init(void);
-void NRF24_FIFO_write(uint8_t *pData);
 void NRF24_ActualConfiguration(void);
+void NRF24_init(void);
+
+void NRF24_Transmit(uint8_t *pData);
+void NRF24_Receive(uint8_t *pData);
+
+void NRF24_TxMode(uint8_t *ID, uint8_t Channel);
+void NRF24_RxMode(uint8_t *ID, uint8_t Channel);
+
+
 #endif /* INC_PERIPHERAL_NRF24_H_ */

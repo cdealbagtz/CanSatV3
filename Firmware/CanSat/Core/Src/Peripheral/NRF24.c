@@ -8,7 +8,12 @@
 #include "Peripheral/NRF24.h"
 
 NRF24_Config_t NRF24_Configurations_Struct;
-uint8_t test[32]={"Hola mundo."};
+uint8_t test[32]={"Prueba numero: "};
+uint8_t Transmision_Flag = 0;
+uint8_t PKG_Received_Flag = 0;
+
+uint8_t PIPE0_Addres[5] = {0xC5,0xC5,0xC5,0xC5,0xC5};
+uint8_t NRF24_Cannel    = 0x56;
 
 
 void NRF24_write(uint8_t Adr, uint8_t data){
@@ -80,47 +85,6 @@ void NRF24_Addr_read(uint8_t Adr){
 	}
 }
 
-void NRF24_DefaultConfiguration(void){
-	NRF24_Configurations_Struct.Default.CONFIG 			= 0x08;
-	NRF24_Configurations_Struct.Default.EN_AA  			= 0x3F;
-	NRF24_Configurations_Struct.Default.EN_RXADDR  		= 0x03;
-	NRF24_Configurations_Struct.Default.SETUP_AW  		= 0x03;
-	NRF24_Configurations_Struct.Default.SETUP_RETR 		= 0x00;
-	NRF24_Configurations_Struct.Default.RF_CH  			= 0x02;
-	NRF24_Configurations_Struct.Default.RF_SETUP  		= 0x0F;
-	NRF24_Configurations_Struct.Default.STATUS  		= 0X0E;
-	NRF24_Configurations_Struct.Default.OBSERVE  		= 0X00;
-	NRF24_Configurations_Struct.Default.CD  			= 0x00;
-	NRF24_Configurations_Struct.Default.RX_ADDR_P0[0]  	= 0xE7;
-	NRF24_Configurations_Struct.Default.RX_ADDR_P0[1]  	= 0xE7;
-	NRF24_Configurations_Struct.Default.RX_ADDR_P0[2]  	= 0xE7;
-	NRF24_Configurations_Struct.Default.RX_ADDR_P0[3]  	= 0xE7;
-	NRF24_Configurations_Struct.Default.RX_ADDR_P0[4]  	= 0xE7;
-	NRF24_Configurations_Struct.Default.RX_ADDR_P1[0]  	= 0xC2;
-	NRF24_Configurations_Struct.Default.RX_ADDR_P1[1]  	= 0xC2;
-	NRF24_Configurations_Struct.Default.RX_ADDR_P1[2]  	= 0xC2;
-	NRF24_Configurations_Struct.Default.RX_ADDR_P1[3]  	= 0xC2;
-	NRF24_Configurations_Struct.Default.RX_ADDR_P1[4]  	= 0xC2;
-	NRF24_Configurations_Struct.Default.RX_ADDR_P2  	= 0xC3;
-	NRF24_Configurations_Struct.Default.RX_ADDR_P3 		= 0xC4;
-	NRF24_Configurations_Struct.Default.RX_ADDR_P4  	= 0xC5;
-	NRF24_Configurations_Struct.Default.RX_ADDR_P5  	= 0xC6;
-	NRF24_Configurations_Struct.Default.TX_ADDR[0]   	= 0xE7;
-	NRF24_Configurations_Struct.Default.TX_ADDR[1]   	= 0xE7;
-	NRF24_Configurations_Struct.Default.TX_ADDR[2]   	= 0xE7;
-	NRF24_Configurations_Struct.Default.TX_ADDR[3]   	= 0xE7;
-	NRF24_Configurations_Struct.Default.TX_ADDR[4]   	= 0xE7;
-	NRF24_Configurations_Struct.Default.RX_PW_P0  		= 0X00;
-	NRF24_Configurations_Struct.Default.RX_PW_P1  		= 0X00;
-	NRF24_Configurations_Struct.Default.RX_PW_P2  		= 0X00;
-	NRF24_Configurations_Struct.Default.RX_PW_P3  		= 0X00;
-	NRF24_Configurations_Struct.Default.RX_PW_P4  		= 0X00;
-	NRF24_Configurations_Struct.Default.RX_PW_P5  		= 0X00;
-	NRF24_Configurations_Struct.Default.FIFO_STATUS  	= 0X11;
-	NRF24_Configurations_Struct.Default.DYNPD  			= 0X00;
-	NRF24_Configurations_Struct.Default.FEATURE  		= 0X00;
-}
-
 void NRF24_ActualConfiguration(void){
 	NRF24_Configurations_Struct.Actual.CONFIG 		= NRF24_read(CONFIG);
 	NRF24_Configurations_Struct.Actual.EN_AA  		= NRF24_read(EN_AA);
@@ -179,6 +143,55 @@ void NRF24_config(NRF24_Address_Configurations_t Configuration_struct){
 	NRF24_write(FEATURE,Configuration_struct.FEATURE);
 }
 
+void NRF24_DefaultConfiguration(void){
+	NRF24_Configurations_Struct.Default.CONFIG 			= 0x08;
+	NRF24_Configurations_Struct.Default.EN_AA  			= 0x3F;
+	NRF24_Configurations_Struct.Default.EN_RXADDR  		= 0x03;
+	NRF24_Configurations_Struct.Default.SETUP_AW  		= 0x03;
+	NRF24_Configurations_Struct.Default.SETUP_RETR 		= 0x03;
+	NRF24_Configurations_Struct.Default.RF_CH  			= 0x02;
+	NRF24_Configurations_Struct.Default.RF_SETUP  		= 0x0F;
+	NRF24_Configurations_Struct.Default.STATUS  		= 0X0E;
+	NRF24_Configurations_Struct.Default.OBSERVE  		= 0X00;
+	NRF24_Configurations_Struct.Default.CD  			= 0x00;
+	NRF24_Configurations_Struct.Default.RX_ADDR_P0[0]  	= 0xE7;
+	NRF24_Configurations_Struct.Default.RX_ADDR_P0[1]  	= 0xE7;
+	NRF24_Configurations_Struct.Default.RX_ADDR_P0[2]  	= 0xE7;
+	NRF24_Configurations_Struct.Default.RX_ADDR_P0[3]  	= 0xE7;
+	NRF24_Configurations_Struct.Default.RX_ADDR_P0[4]  	= 0xE7;
+	NRF24_Configurations_Struct.Default.RX_ADDR_P1[0]  	= 0xC2;
+	NRF24_Configurations_Struct.Default.RX_ADDR_P1[1]  	= 0xC2;
+	NRF24_Configurations_Struct.Default.RX_ADDR_P1[2]  	= 0xC2;
+	NRF24_Configurations_Struct.Default.RX_ADDR_P1[3]  	= 0xC2;
+	NRF24_Configurations_Struct.Default.RX_ADDR_P1[4]  	= 0xC2;
+	NRF24_Configurations_Struct.Default.RX_ADDR_P2  	= 0xC3;
+	NRF24_Configurations_Struct.Default.RX_ADDR_P3 		= 0xC4;
+	NRF24_Configurations_Struct.Default.RX_ADDR_P4  	= 0xC5;
+	NRF24_Configurations_Struct.Default.RX_ADDR_P5  	= 0xC6;
+	NRF24_Configurations_Struct.Default.TX_ADDR[0]   	= 0xE7;
+	NRF24_Configurations_Struct.Default.TX_ADDR[1]   	= 0xE7;
+	NRF24_Configurations_Struct.Default.TX_ADDR[2]   	= 0xE7;
+	NRF24_Configurations_Struct.Default.TX_ADDR[3]   	= 0xE7;
+	NRF24_Configurations_Struct.Default.TX_ADDR[4]   	= 0xE7;
+	NRF24_Configurations_Struct.Default.RX_PW_P0  		= 0X00;
+	NRF24_Configurations_Struct.Default.RX_PW_P1  		= 0X00;
+	NRF24_Configurations_Struct.Default.RX_PW_P2  		= 0X00;
+	NRF24_Configurations_Struct.Default.RX_PW_P3  		= 0X00;
+	NRF24_Configurations_Struct.Default.RX_PW_P4  		= 0X00;
+	NRF24_Configurations_Struct.Default.RX_PW_P5  		= 0X00;
+	NRF24_Configurations_Struct.Default.FIFO_STATUS  	= 0X11;
+	NRF24_Configurations_Struct.Default.DYNPD  			= 0X00;
+	NRF24_Configurations_Struct.Default.FEATURE  		= 0X00;
+	NRF24_config(NRF24_Configurations_Struct.Default);
+}
+void NRF24_PowerUp(void){
+	uint8_t Adr = 0x00;
+	uint8_t Buffer= NRF24_read(Adr);
+	Adr |= W_REGISTER;
+	Buffer |= 0x02;
+	NRF24_write(Adr, Buffer);
+}
+
 void NRF24_FIFO_write(uint8_t *pData){
 	uint8_t Adr = W_TX_PAYLOAD;
 	NRF24_select();
@@ -187,7 +200,16 @@ void NRF24_FIFO_write(uint8_t *pData){
 		HAL_SPI_Transmit_DMA(SPI_NRF24, &pData[n], 1);
 	}
 	NRF24_unselect();
-	test[12]+=1;                    //Variable para purebas, eliminar despues
+}
+
+void NRF24_FIFO_read(uint8_t *pData){
+	uint8_t Adr = R_RX_PAYLOAD;
+	NRF24_select();
+	HAL_SPI_Transmit_DMA(SPI_NRF24, &Adr, 1);
+	for (uint8_t n = 0; n < 32; ++n) {
+		HAL_SPI_Receive_DMA(SPI_NRF24, &pData[n], 1);
+	}
+	NRF24_unselect();
 }
 
 void NRF24_FlushTxFIFO(void){
@@ -197,15 +219,58 @@ void NRF24_FlushTxFIFO(void){
 	NRF24_unselect();
 }
 
-void NRF24_loadStructures(void){
-	NRF24_DefaultConfiguration();
+void NRF24_FlushRxFIFO(void){
+	uint8_t Adr = FLUSH_RX;
+	NRF24_select();
+	HAL_SPI_Transmit_DMA(SPI_NRF24, &Adr, 1);
+	NRF24_unselect();
 }
+
+void NRF24_TxMode(uint8_t *ID, uint8_t Channel){
+	NRF24_Disable();
+	NRF24_FlushTxFIFO();
+
+	NRF24_write(RF_CH, Channel);
+	NRF24_write(EN_AA, 0x00);
+	NRF24_write(SETUP_RETR, 0x00);
+	NRF24_write(RF_SETUP, 0x08);
+	NRF24_Addr_write(TX_ADDR, ID);
+	NRF24_write(CONFIG, 0x0A);
+	NRF24_Enable();
+}
+
+void NRF24_RxMode(uint8_t *ID, uint8_t Channel){
+	NRF24_Disable();
+	NRF24_FlushRxFIFO();
+
+	NRF24_write(RF_CH, Channel);
+	NRF24_write(EN_AA, 0x00);
+	NRF24_write(SETUP_RETR, 0x00);
+	NRF24_write(RF_SETUP, 0x08);
+	NRF24_Addr_write(RX_ADDR_P1, ID);
+	NRF24_write(RX_PW_P1, 32);
+	NRF24_write(CONFIG, 0x0B);
+	NRF24_Enable();
+}
+
+void NRF24_Transmit(uint8_t *pData){
+	NRF24_FIFO_write(pData);
+	uint8_t TxDataFIFO = NRF24_read(FIFO_STATUS);
+	test[15]+=1;                    //Variable para purebas, eliminar despues
+	NRF24_Enable();
+}
+
+
+void NRF24_Receive(uint8_t *pData){
+	NRF24_FIFO_read(pData);
+	uint8_t RxDataFIFO = NRF24_read(FIFO_STATUS);
+}
+
 void NRF24_init(void){
 	NRF24_Disable();
 	NRF24_unselect();
-	NRF24_loadStructures();
+	NRF24_DefaultConfiguration();
 	NRF24_FlushTxFIFO();
-	NRF24_config(NRF24_Configurations_Struct.Default);
-
 	NRF24_ActualConfiguration();
+
 }

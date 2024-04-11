@@ -13,6 +13,10 @@
 #include "dma.h"
 #include "gpio.h"
 
+extern uint8_t test[32];
+extern uint8_t PIPE0_Addres[5];
+extern uint8_t NRF24_Cannel;
+
 /*!
  * @struct 	auto_pilot_datalink_def
  * @brief	Estructura para los diferentes tipos de mision de AP
