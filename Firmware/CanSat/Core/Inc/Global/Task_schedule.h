@@ -10,6 +10,9 @@
 
 #include "Peripheral/NRF24.h"
 
+void task_init_1ms(void);
+void task_1ms(void);
+
 void task_init_10ms(void);
 void task_10ms(void);
 

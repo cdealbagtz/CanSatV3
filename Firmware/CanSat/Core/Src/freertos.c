@@ -50,6 +50,7 @@
 osThreadId Task10msHandle;
 osThreadId Task100msHandle;
 osThreadId Task1000msHandle;
+osThreadId Task1msHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -59,6 +60,7 @@ osThreadId Task1000msHandle;
 void Task_10ms(void const * argument);
 void Task_100ms(void const * argument);
 void Task_1000ms(void const * argument);
+void Task_1ms(void const * argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -116,6 +118,10 @@ void MX_FREERTOS_Init(void) {
   /* definition and creation of Task1000ms */
   osThreadDef(Task1000ms, Task_1000ms, osPriorityIdle, 0, 128);
   Task1000msHandle = osThreadCreate(osThread(Task1000ms), NULL);
+
+  /* definition and creation of Task1ms */
+  osThreadDef(Task1ms, Task_1ms, osPriorityAboveNormal, 0, 128);
+  Task1msHandle = osThreadCreate(osThread(Task1ms), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -181,6 +187,26 @@ void Task_1000ms(void const * argument)
     osDelay(1000);
   }
   /* USER CODE END Task_1000ms */
+}
+
+/* USER CODE BEGIN Header_Task_1ms */
+/**
+* @brief Function implementing the Task1ms thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_Task_1ms */
+void Task_1ms(void const * argument)
+{
+  /* USER CODE BEGIN Task_1ms */
+	task_init_1ms();
+  /* Infinite loop */
+  for(;;)
+  {
+	task_1ms();
+    osDelay(1);
+  }
+  /* USER CODE END Task_1ms */
 }
 
 /* Private application code --------------------------------------------------*/
