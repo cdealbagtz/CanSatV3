@@ -214,6 +214,7 @@ void NRF24_DefaultConfiguration(void){
 	NRF24_Configurations_Struct.Default.FEATURE  		= 0X00;
 	NRF24_config(NRF24_Configurations_Struct.Default);
 	NRF24_ActualConfiguration();
+	NRF24_mode = Init;
 }
 
 void NRF24_TxConfiguration(void){
