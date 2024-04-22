@@ -21,7 +21,7 @@ void task_init_1ms(void){
   * @brief  Ejecucion de tareas de 1 milisegundo
   */
 void task_1ms(void){
-
+	NRF24_StateMachine();
 }
 
 /**
@@ -69,5 +69,4 @@ void task_init_1000ms(void){
   * @brief  Ejecucion de tareas de 1000 milisegundos
   */
 void task_1000ms(void){
-
 }

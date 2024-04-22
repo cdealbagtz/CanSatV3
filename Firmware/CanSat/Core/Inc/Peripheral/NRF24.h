@@ -86,16 +86,15 @@ enum NRF24_ADDRESS{
 	FEATURE					=	0X1D
 };
 
+enum NRF24_modes{
+	Init,
+	TxMode,
+	RxMode,
+	PowerSave
+};
 
-
-void NRF24_ActualConfiguration(void);
 void NRF24_init(void);
 
-void NRF24_Transmit(uint8_t *pData);
-void NRF24_Receive(uint8_t *pData);
-
-void NRF24_TxMode(uint8_t *ID, uint8_t Channel);
-void NRF24_RxMode(uint8_t *ID, uint8_t Channel);
-
+void NRF24_StateMachine(void);
 
 #endif /* INC_PERIPHERAL_NRF24_H_ */

@@ -8,14 +8,18 @@
 #include "Peripheral/NRF24.h"
 
 NRF24_Config_t NRF24_Configurations_Struct;
-uint8_t test[32]={"Prueba numero: "};
 uint8_t Transmision_Flag = 0;
-uint8_t PKG_Received_Flag = 0;
 
+uint8_t TX_FULL, RX_P_NO, MAX_RT, TX_DS, RX_DR;
+uint8_t RX_EMPTY, RX_FULL, TX_EMPTY, TX_FULL, TX_REUSE;
 
 uint8_t PIPE0_Addres[5] = {0xC5,0xC5,0xC5,0xC5,0xC5};
 uint8_t NRF24_Cannel    = 0x56;
 
+uint8_t Cont_TX = 0;
+uint8_t NRF24_mode;
+
+uint8_t TxBuffer[32];
 
 void NRF24_write(uint8_t Adr, uint8_t data){
 	Adr |= W_REGISTER;
@@ -213,10 +217,10 @@ void NRF24_DefaultConfiguration(void){
 
 void NRF24_TxConfiguration(void){
 	NRF24_Configurations_Struct.Tx_mode.CONFIG 			= 0x08;
-	NRF24_Configurations_Struct.Tx_mode.EN_AA  			= 0x3F;
-	NRF24_Configurations_Struct.Tx_mode.EN_RXADDR  		= 0x03;
+	NRF24_Configurations_Struct.Tx_mode.EN_AA  			= 0x01;
+	NRF24_Configurations_Struct.Tx_mode.EN_RXADDR  		= 0x01;
 	NRF24_Configurations_Struct.Tx_mode.SETUP_AW  		= 0x03;
-	NRF24_Configurations_Struct.Tx_mode.SETUP_RETR 		= 0x03;
+	NRF24_Configurations_Struct.Tx_mode.SETUP_RETR 		= 0x00;
 	NRF24_Configurations_Struct.Tx_mode.RF_CH  			= 0x02;
 	NRF24_Configurations_Struct.Tx_mode.RF_SETUP  		= 0x0F;
 	NRF24_Configurations_Struct.Tx_mode.STATUS  		= 0X70;
@@ -241,8 +245,8 @@ void NRF24_TxConfiguration(void){
 	NRF24_Configurations_Struct.Tx_mode.TX_ADDR[2]   	= 0xE7;
 	NRF24_Configurations_Struct.Tx_mode.TX_ADDR[3]   	= 0xE7;
 	NRF24_Configurations_Struct.Tx_mode.TX_ADDR[4]   	= 0xE7;
-	NRF24_Configurations_Struct.Tx_mode.RX_PW_P0  		= 0X00;
-	NRF24_Configurations_Struct.Tx_mode.RX_PW_P1  		= 0X00;
+	NRF24_Configurations_Struct.Tx_mode.RX_PW_P0  		= 0X01;
+	NRF24_Configurations_Struct.Tx_mode.RX_PW_P1  		= 0X01;
 	NRF24_Configurations_Struct.Tx_mode.RX_PW_P2  		= 0X00;
 	NRF24_Configurations_Struct.Tx_mode.RX_PW_P3  		= 0X00;
 	NRF24_Configurations_Struct.Tx_mode.RX_PW_P4  		= 0X00;
@@ -255,8 +259,23 @@ void NRF24_TxConfiguration(void){
 	NRF24_ActualConfiguration();
 }
 
+void NRF24_CheckFlags(void){
+	uint8_t buffer = NRF24_read(STATUS);
+	TX_FULL =  buffer & 0x01;
+	RX_P_NO = (buffer & 0x0E) >> 1;
+	MAX_RT  = (buffer & 0x10) >> 4;
+	TX_DS   = (buffer & 0x20) >> 5;
+	RX_DR   = (buffer & 0x40) >> 6;
 
-void NRF24_FIFO_write(uint8_t *pData){
+	buffer   = NRF24_read(FIFO_STATUS);
+	RX_EMPTY =  buffer & 0x01;
+	RX_FULL  = (buffer & 0x02) >> 1;
+	TX_EMPTY = (buffer & 0x10) >> 4;
+	TX_FULL  = (buffer & 0x20) >> 5;
+	TX_REUSE = (buffer & 0x40) >> 6;
+}
+
+void NRF24_FIFO_write(uint8_t *pData, uint8_t size){
 	uint8_t Adr = W_TX_PAYLOAD;
 	NRF24_select();
 	HAL_SPI_Transmit_DMA(SPI_NRF24, &Adr, 1);
@@ -276,9 +295,24 @@ void NRF24_FIFO_read(uint8_t *pData){
 	NRF24_unselect();
 }
 
-void NRF24_transmit(void){
-	uint8_t FIFOStatus = NRF24_read(FIFO_STATUS);
 
+
+void NRF24_init(void){
+	NRF24_Disable();
+	NRF24_unselect();
+	NRF24_DefaultConfiguration();
+	NRF24_PowerUp();
+	NRF24_mode = 0;
+}
+
+void NRF24_transmit(void){
+	NRF24_CheckFlags();
+	if(Cont_TX > 100){
+		Cont_TX = 0;
+		NRF24_FIFO_write(TxBuffer, 32);
+		++TxBuffer[0];
+		Transmision_Flag = 0;
+	}
 	switch (Transmision_Flag) {
 		case 0:
 			NRF24_Enable();
@@ -286,14 +320,28 @@ void NRF24_transmit(void){
 			break;
 		case 1:
 			NRF24_Disable();
-			Transmision_Flag = 0;
 			break;
+	}
+	++Cont_TX;
+}
+
+void NRF24_StateMachine(void){
+	switch (NRF24_mode){
+		case Init:
+
+			break;
+		case RxMode:
+
+			break;
+		case TxMode:
+			NRF24_transmit();
+			break;
+		case PowerSave:
+
+			break;
+		default:
+			NRF24_init();
 	}
 }
 
-void NRF24_init(void){
-	NRF24_Disable();
-	NRF24_unselect();
-	NRF24_DefaultConfiguration();
-	NRF24_PowerUp();
-}
+

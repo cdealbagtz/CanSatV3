@@ -46,9 +46,6 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-uint8_t TxBuffer[32]={0x15,0x10,0x05,0x00};
-uint8_t TxStatus=0;
-uint8_t Config[50];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
