@@ -57,6 +57,20 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define BMP280_MISO_Pin GPIO_PIN_2
+#define BMP280_MISO_GPIO_Port GPIOC
+#define BMP280_MOSI_Pin GPIO_PIN_3
+#define BMP280_MOSI_GPIO_Port GPIOC
+#define NRF24_SCK_Pin GPIO_PIN_5
+#define NRF24_SCK_GPIO_Port GPIOA
+#define NRF24_MISO_Pin GPIO_PIN_6
+#define NRF24_MISO_GPIO_Port GPIOA
+#define NRF24_MOSI_Pin GPIO_PIN_7
+#define NRF24_MOSI_GPIO_Port GPIOA
+#define BMP280_SCK_Pin GPIO_PIN_10
+#define BMP280_SCK_GPIO_Port GPIOB
+#define BMP280_CSN_Pin GPIO_PIN_9
+#define BMP280_CSN_GPIO_Port GPIOA
 #define TMS_Pin GPIO_PIN_13
 #define TMS_GPIO_Port GPIOA
 #define TCK_Pin GPIO_PIN_14

@@ -1,4 +1,5 @@
 "./Core/Src/Global/Task_schedule.o"
+"./Core/Src/Peripheral/BMP280.o"
 "./Core/Src/Peripheral/NRF24.o"
 "./Core/Src/dma.o"
 "./Core/Src/freertos.o"
