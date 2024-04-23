@@ -353,10 +353,9 @@ void NRF24_Transmit(void){
 	NRF24_CheckFlags();
 	if(MAX_RT)  NRF24_write(STATUS, 0x70);
 	if(TX_FULL) NRF24_FlushTxFIFO();
-	if(Cont_TX > 100){
+	if(Cont_TX > 10){
 		Cont_TX = 0;
 		NRF24_FIFO_write(TxBuffer, 32);
-		++TxBuffer[0];
 		Transmision_Flag = 0;
 	}
 	switch (Transmision_Flag) {
@@ -378,6 +377,16 @@ void NRF24_Receive(void){
 	}
 }
 
+void NRF24_TxBuffer(void){
+	++TxBuffer[0];
+	for (uint8_t n = 0; n < 30; ++n) {
+		if(TxBuffer[n]==0xFF){
+			++TxBuffer[n];
+			++TxBuffer[n+1];
+		}
+	}
+}
+
 void NRF24_StateMachine(void){
 	switch (NRF24_mode){
 		case Init:
@@ -386,9 +395,11 @@ void NRF24_StateMachine(void){
 			NRF24_ActualConfiguration();
 			break;
 		case RxMode:
+
 			NRF24_Receive();
 			break;
 		case TxMode:
+			NRF24_TxBuffer();
 			NRF24_Transmit();
 			break;
 		case PowerSave:
@@ -398,5 +409,3 @@ void NRF24_StateMachine(void){
 			NRF24_init();
 	}
 }
-
-
