@@ -28,6 +28,20 @@
  */
 #define BMP280_unselect()		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_SET)
 
+enum BMP280_memoryMap{
+	ID 			= 0xD0,
+	reset		= 0xE0,
+	status		= 0xF3,
+	ctrl_meas 	= 0xF4,
+	config      = 0xF5,
+	press_msb   = 0xF7,
+	press_lsb,
+	press_xlsb,
+	temp_msb,
+	temp_lsb,
+	temp_xlsb
+};
 
+void BMP280_init(void);
 
 #endif /* INC_PERIPHERAL_BMP280_H_ */

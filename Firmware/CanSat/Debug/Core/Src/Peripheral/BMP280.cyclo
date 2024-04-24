@@ -1,0 +1,6 @@
+../Core/Src/Peripheral/BMP280.c:15:6:BMP280_write	1
+../Core/Src/Peripheral/BMP280.c:24:9:BMP280_read	1
+../Core/Src/Peripheral/BMP280.c:34:6:BMP280_config	1
+../Core/Src/Peripheral/BMP280.c:39:6:BMP280_reset	1
+../Core/Src/Peripheral/BMP280.c:43:6:BMP280_flags	1
+../Core/Src/Peripheral/BMP280.c:49:6:BMP280_init	1

@@ -26,6 +26,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "Peripheral/NRF24.h"
+#include "Peripheral/BMP280.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -93,6 +94,7 @@ int main(void)
   MX_SPI2_Init();
   /* USER CODE BEGIN 2 */
   NRF24_init();
+  BMP280_init();
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */
