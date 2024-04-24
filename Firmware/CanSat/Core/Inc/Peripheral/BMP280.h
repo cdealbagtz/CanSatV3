@@ -9,6 +9,7 @@
 #define INC_PERIPHERAL_BMP280_H_
 
 #include "Global/Global_definitions.h"
+#include <math.h>
 
 /*!
  * @def 	SPI_BMP280

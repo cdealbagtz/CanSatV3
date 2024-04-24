@@ -58,6 +58,9 @@ typedef struct NRF24_Config{
 	NRF24_Address_Configurations_t Actual;
 }NRF24_Config_t;
 
-
+typedef union U16{
+	uint16_t data;
+	uint8_t  bytes[2];
+}U16_t;
 
 #endif /* INC_GLOBAL_GLOBAL_DEFINITIONS_H_ */
