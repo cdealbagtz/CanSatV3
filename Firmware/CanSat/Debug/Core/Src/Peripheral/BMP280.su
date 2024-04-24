@@ -8,3 +8,4 @@
 ../Core/Src/Peripheral/BMP280.c:91:9:BMP280_measureT	32	static
 ../Core/Src/Peripheral/BMP280.c:100:10:BMP280_measureP	328	static
 ../Core/Src/Peripheral/BMP280.c:121:6:BMP280_init	8	static
+../Core/Src/Peripheral/BMP280.c:128:6:BMP280_calculate	8	static

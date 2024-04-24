@@ -44,5 +44,6 @@ enum BMP280_memoryMap{
 };
 
 void BMP280_init(void);
+void BMP280_calculate(void);
 
 #endif /* INC_PERIPHERAL_BMP280_H_ */

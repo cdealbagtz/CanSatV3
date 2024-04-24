@@ -30,7 +30,7 @@ Core/Src/Global/Task_schedule.o: ../Core/Src/Global/Task_schedule.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Core/Inc/spi.h ../Core/Inc/main.h ../Core/Inc/dma.h \
- ../Core/Inc/gpio.h
+ ../Core/Inc/gpio.h ../Core/Inc/Peripheral/BMP280.h
 ../Core/Inc/Global/Task_schedule.h:
 ../Core/Inc/Peripheral/NRF24.h:
 ../Core/Inc/Global/Global_definitions.h:
@@ -66,3 +66,4 @@ Core/Src/Global/Task_schedule.o: ../Core/Src/Global/Task_schedule.c \
 ../Core/Inc/main.h:
 ../Core/Inc/dma.h:
 ../Core/Inc/gpio.h:
+../Core/Inc/Peripheral/BMP280.h:

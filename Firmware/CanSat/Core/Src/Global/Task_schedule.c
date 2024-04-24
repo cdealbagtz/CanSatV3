@@ -22,6 +22,7 @@ void task_init_1ms(void){
   */
 void task_1ms(void){
 	NRF24_StateMachine();
+	BMP280_calculate();
 }
 
 /**

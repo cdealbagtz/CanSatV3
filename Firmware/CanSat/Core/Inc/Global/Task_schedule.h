@@ -9,6 +9,7 @@
 #define INC_GLOBAL_TASK_SCHEDULE_H_
 
 #include "Peripheral/NRF24.h"
+#include "Peripheral/BMP280.h"
 
 void task_init_1ms(void);
 void task_1ms(void);

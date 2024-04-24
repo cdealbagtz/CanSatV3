@@ -123,10 +123,11 @@ void BMP280_init(void){
 	BMP280_config();
 	BMP280_ID = BMP280_read(0x89);
 	BMP280_calibrationData();
+}
+
+void BMP280_calculate(void){
 	BMP280_readRawValues();
 	Temperature = BMP280_measureT(T_raw);
 	Presure     = (BMP280_measureP(P_raw)*100)/256;
-
 }
-
 
