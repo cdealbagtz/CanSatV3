@@ -22,7 +22,7 @@ void task_init_1ms(void){
   */
 void task_1ms(void){
 	NRF24_StateMachine();
-	BMP280_calculate();
+
 }
 
 /**
@@ -54,7 +54,7 @@ void task_init_100ms(void){
   * @brief  Ejecucion de tareas de 100 milisegundos
   */
 void task_100ms(void){
-
+	BMP280_calculate();
 }
 
 /**

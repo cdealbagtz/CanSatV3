@@ -8,6 +8,7 @@
 
 #include "Peripheral/BMP280.h"
 
+
 uint8_t BMP280_ID;
 uint8_t BMP280_measuring;
 uint8_t BMP280_im_update;
@@ -107,7 +108,7 @@ uint32_t BMP280_measureP(int32_t adc_P){
 	var1 = (((((int64_t)1)<<47)+var1))*((int64_t)dig_P1)>>33;
 	if (var1 == 0)
 	{
-	return 0; // avoid exception caused by division by zero
+	return 0;
 	}
 	p = 1048576-adc_P;
 	p = (((p<<31)-var2)*3125)/var1;
@@ -117,6 +118,17 @@ uint32_t BMP280_measureP(int32_t adc_P){
 	return (uint32_t)p;
 }
 
+int32_t BMP280_measureH(int32_t Pres, int32_t Temp){
+	double var1, var2, h;
+
+	if(Pres == 0) return 0;
+	var1 = -log((((double)Pres)/100)/101325);
+
+	if(var1 == 0) return 0;
+	var2 = 0.0341663/((((double)Temp)/100)+273.15);
+	h = (var1/var2)*100;
+	return (int32_t)h;
+}
 
 void BMP280_init(void){
 	BMP280_unselect();
@@ -129,5 +141,6 @@ void BMP280_calculate(void){
 	BMP280_readRawValues();
 	Temperature = BMP280_measureT(T_raw);
 	Presure     = (BMP280_measureP(P_raw)*100)/256;
+	Altitud = BMP280_measureH(Presure, Temperature);
 }
 

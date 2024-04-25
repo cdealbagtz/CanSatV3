@@ -3,6 +3,6 @@
 ../Core/Src/Global/Task_schedule.c:32:6:task_init_10ms	4	static
 ../Core/Src/Global/Task_schedule.c:40:6:task_10ms	4	static
 ../Core/Src/Global/Task_schedule.c:48:6:task_init_100ms	4	static
-../Core/Src/Global/Task_schedule.c:56:6:task_100ms	4	static
+../Core/Src/Global/Task_schedule.c:56:6:task_100ms	8	static
 ../Core/Src/Global/Task_schedule.c:64:6:task_init_1000ms	4	static
 ../Core/Src/Global/Task_schedule.c:72:6:task_1000ms	4	static
