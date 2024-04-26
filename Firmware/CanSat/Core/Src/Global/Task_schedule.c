@@ -38,7 +38,7 @@ void task_init_10ms(void){
   * @brief  Ejecucion de tareas de 10 milisegundos
   */
 void task_10ms(void){
-
+	MPU6050_calculate();
 }
 
 /**
@@ -55,6 +55,7 @@ void task_init_100ms(void){
   */
 void task_100ms(void){
 	BMP280_calculate();
+
 }
 
 /**

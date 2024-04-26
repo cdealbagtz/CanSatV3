@@ -6,15 +6,18 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../Core/Src/Peripheral/BMP280.c \
-../Core/Src/Peripheral/NRF24.c 
+../Core/Src/Peripheral/NRF24.c \
+../Core/Src/Peripheral/mpu6050.c 
 
 OBJS += \
 ./Core/Src/Peripheral/BMP280.o \
-./Core/Src/Peripheral/NRF24.o 
+./Core/Src/Peripheral/NRF24.o \
+./Core/Src/Peripheral/mpu6050.o 
 
 C_DEPS += \
 ./Core/Src/Peripheral/BMP280.d \
-./Core/Src/Peripheral/NRF24.d 
+./Core/Src/Peripheral/NRF24.d \
+./Core/Src/Peripheral/mpu6050.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -24,7 +27,7 @@ Core/Src/Peripheral/%.o Core/Src/Peripheral/%.su Core/Src/Peripheral/%.cyclo: ..
 clean: clean-Core-2f-Src-2f-Peripheral
 
 clean-Core-2f-Src-2f-Peripheral:
-	-$(RM) ./Core/Src/Peripheral/BMP280.cyclo ./Core/Src/Peripheral/BMP280.d ./Core/Src/Peripheral/BMP280.o ./Core/Src/Peripheral/BMP280.su ./Core/Src/Peripheral/NRF24.cyclo ./Core/Src/Peripheral/NRF24.d ./Core/Src/Peripheral/NRF24.o ./Core/Src/Peripheral/NRF24.su
+	-$(RM) ./Core/Src/Peripheral/BMP280.cyclo ./Core/Src/Peripheral/BMP280.d ./Core/Src/Peripheral/BMP280.o ./Core/Src/Peripheral/BMP280.su ./Core/Src/Peripheral/NRF24.cyclo ./Core/Src/Peripheral/NRF24.d ./Core/Src/Peripheral/NRF24.o ./Core/Src/Peripheral/NRF24.su ./Core/Src/Peripheral/mpu6050.cyclo ./Core/Src/Peripheral/mpu6050.d ./Core/Src/Peripheral/mpu6050.o ./Core/Src/Peripheral/mpu6050.su
 
 .PHONY: clean-Core-2f-Src-2f-Peripheral
 

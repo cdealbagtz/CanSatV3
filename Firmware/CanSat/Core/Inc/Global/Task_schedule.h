@@ -10,6 +10,7 @@
 
 #include "Peripheral/NRF24.h"
 #include "Peripheral/BMP280.h"
+#include "Peripheral/mpu6050.h"
 
 void task_init_1ms(void);
 void task_1ms(void);

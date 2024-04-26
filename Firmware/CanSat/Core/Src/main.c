@@ -20,6 +20,7 @@
 #include "main.h"
 #include "cmsis_os.h"
 #include "dma.h"
+#include "i2c.h"
 #include "spi.h"
 #include "gpio.h"
 
@@ -27,6 +28,7 @@
 /* USER CODE BEGIN Includes */
 #include "Peripheral/NRF24.h"
 #include "Peripheral/BMP280.h"
+#include "Peripheral/mpu6050.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -92,9 +94,11 @@ int main(void)
   MX_DMA_Init();
   MX_SPI1_Init();
   MX_SPI2_Init();
+  MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
   NRF24_init();
   BMP280_init();
+  while (MPU6050_Init(&hi2c1) == 1);
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */
