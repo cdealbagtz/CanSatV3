@@ -6,6 +6,7 @@
  */
 
 #include "Peripheral/NRF24.h"
+#include "Peripheral/mpu6050.h"
 
 NRF24_Config_t NRF24_Configurations_Struct;
 uint8_t Transmision_Flag = 0;
@@ -21,6 +22,15 @@ uint8_t NRF24_mode;
 
 uint8_t TxBuffer[32];
 uint8_t RxBuffer[32];
+
+uint8_t N_message;
+
+extern S32_t Temperature, Altitud;
+extern U32_t Presure;
+
+extern MPU6050_t MPU6050;
+
+S32_t AngleX, AngleY;
 
 void NRF24_write(uint8_t Adr, uint8_t data){
 	Adr |= W_REGISTER;
@@ -356,6 +366,7 @@ void NRF24_Transmit(void){
 	if(Cont_TX > 10){
 		Cont_TX = 0;
 		NRF24_FIFO_write(TxBuffer, 32);
+		N_message += 1;
 		Transmision_Flag = 0;
 	}
 	switch (Transmision_Flag) {
@@ -378,14 +389,33 @@ void NRF24_Receive(void){
 }
 
 void NRF24_TxBuffer(void){
-	++TxBuffer[0];
-	for (uint8_t n = 0; n < 30; ++n) {
-		if(TxBuffer[n]==0xFF){
-			++TxBuffer[n];
-			++TxBuffer[n+1];
-		}
-	}
+	AngleX.data =  (int32_t)(MPU6050.KalmanAngleX * 100);
+	AngleY.data =  (int32_t)(MPU6050.KalmanAngleY * 100);
+	TxBuffer[0] = 0x10;
+	TxBuffer[1] = Temperature.bytes[0];
+	TxBuffer[2] = Temperature.bytes[1];
+	TxBuffer[3] = Temperature.bytes[2];
+	TxBuffer[4] = Temperature.bytes[3];
+	TxBuffer[5] = Altitud.bytes[0];
+	TxBuffer[6] = Altitud.bytes[1];
+	TxBuffer[7] = Altitud.bytes[2];
+	TxBuffer[8] = Altitud.bytes[3];
+	TxBuffer[9]  = Presure.bytes[0];
+	TxBuffer[10] = Presure.bytes[1];
+	TxBuffer[11] = Presure.bytes[2];
+	TxBuffer[12] = Presure.bytes[3];
+	TxBuffer[13] = AngleX.bytes  [0];
+	TxBuffer[14] = AngleX.bytes  [1];
+	TxBuffer[15] = AngleX.bytes  [2];
+	TxBuffer[16] = AngleX.bytes  [3];
+	TxBuffer[17] = AngleY.bytes  [0];
+	TxBuffer[18] = AngleY.bytes  [1];
+	TxBuffer[19] = AngleY.bytes  [2];
+	TxBuffer[20] = AngleY.bytes  [3];
+	TxBuffer[21] = N_message;
+
 }
+
 
 void NRF24_StateMachine(void){
 	switch (NRF24_mode){
@@ -395,7 +425,6 @@ void NRF24_StateMachine(void){
 			NRF24_ActualConfiguration();
 			break;
 		case RxMode:
-
 			NRF24_Receive();
 			break;
 		case TxMode:

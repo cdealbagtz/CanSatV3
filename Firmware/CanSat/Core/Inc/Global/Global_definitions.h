@@ -12,6 +12,7 @@
 #include "spi.h"
 #include "dma.h"
 #include "gpio.h"
+#include "i2c.h"
 
 extern uint8_t test[32];
 extern uint8_t PIPE0_Addres[5];
@@ -51,6 +52,8 @@ typedef struct NRF24_Address_Configurations
 	uint8_t FEATURE;
 }NRF24_Address_Configurations_t;
 
+
+
 typedef struct NRF24_Config{
 	NRF24_Address_Configurations_t Default;
 	NRF24_Address_Configurations_t Tx_mode;
@@ -62,5 +65,15 @@ typedef union U16{
 	uint16_t data;
 	uint8_t  bytes[2];
 }U16_t;
+
+typedef union S32{
+	int32_t data;
+	uint8_t  bytes[4];
+}S32_t;
+
+typedef union U32{
+	int32_t data;
+	uint8_t  bytes[4];
+}U32_t;
 
 #endif /* INC_GLOBAL_GLOBAL_DEFINITIONS_H_ */

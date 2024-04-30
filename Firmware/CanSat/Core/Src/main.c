@@ -98,7 +98,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
   NRF24_init();
   BMP280_init();
-  while (MPU6050_Init(&hi2c1) == 1);
+  MPU6050_Init(&hi2c1);
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */

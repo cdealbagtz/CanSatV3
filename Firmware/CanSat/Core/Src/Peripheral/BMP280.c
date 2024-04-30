@@ -16,8 +16,9 @@ uint8_t BMP280_im_update;
 uint16_t dig_T1, dig_P1;
 int16_t  dig_T2, dig_T3, dig_P2,dig_P3, dig_P4, dig_P5, dig_P6, dig_P7, dig_P8, dig_P9;
 
-int32_t T_raw, P_raw, t_fine,Temperature, Altitud;
-uint32_t Presure;
+int32_t T_raw, P_raw, t_fine;
+S32_t Temperature, Altitud;
+U32_t Presure;
 
 
 void BMP280_write(uint8_t Address, uint8_t Data){
@@ -139,8 +140,8 @@ void BMP280_init(void){
 
 void BMP280_calculate(void){
 	BMP280_readRawValues();
-	Temperature = BMP280_measureT(T_raw);
-	Presure     = (BMP280_measureP(P_raw)*100)/256;
-	Altitud = BMP280_measureH(Presure, Temperature);
+	Temperature.data = BMP280_measureT(T_raw);
+	Presure.data     = (BMP280_measureP(P_raw)*100)/256;
+	Altitud.data = BMP280_measureH(Presure.data, Temperature.data);
 }
 

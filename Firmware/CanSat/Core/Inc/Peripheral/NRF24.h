@@ -10,6 +10,8 @@
 
 #include "Global/Global_definitions.h"
 
+
+
 /*!
  * @def 	SPI_NRF24
  * @brief 	Almacena el puntero a la configuración del SPI para el NF24

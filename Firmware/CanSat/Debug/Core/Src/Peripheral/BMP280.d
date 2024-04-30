@@ -31,7 +31,7 @@ Core/Src/Peripheral/BMP280.o: ../Core/Src/Peripheral/BMP280.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Core/Inc/spi.h ../Core/Inc/main.h ../Core/Inc/dma.h \
- ../Core/Inc/gpio.h
+ ../Core/Inc/gpio.h ../Core/Inc/i2c.h
 ../Core/Inc/Peripheral/BMP280.h:
 ../Core/Inc/Global/Global_definitions.h:
 ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h:
@@ -68,3 +68,4 @@ Core/Src/Peripheral/BMP280.o: ../Core/Src/Peripheral/BMP280.c \
 ../Core/Inc/main.h:
 ../Core/Inc/dma.h:
 ../Core/Inc/gpio.h:
+../Core/Inc/i2c.h:
