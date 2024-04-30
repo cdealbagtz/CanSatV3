@@ -6,6 +6,7 @@
  */
 
 #include "Peripheral/NRF24.h"
+#include "usart.h"
 
 NRF24_Config_t NRF24_Configurations_Struct;
 uint8_t Transmision_Flag = 0;
@@ -374,6 +375,7 @@ void NRF24_Receive(void){
 	NRF24_CheckFlags();
 	if(RX_P_NO != 7){
 		NRF24_FIFO_read(RxBuffer);
+		HAL_UART_Transmit(&huart1, RxBuffer, 32, 100);
 	}
 }
 
