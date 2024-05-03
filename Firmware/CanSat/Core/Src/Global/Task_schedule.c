@@ -39,6 +39,7 @@ void task_init_10ms(void){
   */
 void task_10ms(void){
 	MPU6050_calculate();
+
 }
 
 /**
@@ -55,6 +56,7 @@ void task_init_100ms(void){
   */
 void task_100ms(void){
 	BMP280_calculate();
+	ErrorFlags_check();
 
 }
 

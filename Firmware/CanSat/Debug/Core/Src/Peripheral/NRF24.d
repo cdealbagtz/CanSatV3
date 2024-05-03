@@ -30,6 +30,7 @@ Core/Src/Peripheral/NRF24.o: ../Core/Src/Peripheral/NRF24.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
  ../Core/Inc/spi.h ../Core/Inc/main.h ../Core/Inc/dma.h \
  ../Core/Inc/gpio.h ../Core/Inc/i2c.h ../Core/Inc/Peripheral/mpu6050.h
 ../Core/Inc/Peripheral/NRF24.h:
@@ -64,6 +65,7 @@ Core/Src/Peripheral/NRF24.o: ../Core/Src/Peripheral/NRF24.c \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 ../Core/Inc/spi.h:
 ../Core/Inc/main.h:
 ../Core/Inc/dma.h:

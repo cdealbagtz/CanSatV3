@@ -43,6 +43,8 @@ enum BMP280_memoryMap{
 	temp_xlsb
 };
 
+uint8_t BMP280_read(uint8_t Address);
+
 void BMP280_init(void);
 void BMP280_calculate(void);
 

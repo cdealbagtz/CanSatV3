@@ -8,9 +8,13 @@
 #ifndef INC_GLOBAL_TASK_SCHEDULE_H_
 #define INC_GLOBAL_TASK_SCHEDULE_H_
 
+#include "Global/Global_definitions.h"
+
 #include "Peripheral/NRF24.h"
 #include "Peripheral/BMP280.h"
 #include "Peripheral/mpu6050.h"
+
+extern uint8_t ErrorFlags;
 
 void task_init_1ms(void);
 void task_1ms(void);

@@ -95,6 +95,8 @@ enum NRF24_modes{
 	PowerSave
 };
 
+void NRF24_ActualConfiguration(void);
+
 void NRF24_init(void);
 
 void NRF24_StateMachine(void);

@@ -5,12 +5,15 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../Core/Src/Global/Flags.c \
 ../Core/Src/Global/Task_schedule.c 
 
 OBJS += \
+./Core/Src/Global/Flags.o \
 ./Core/Src/Global/Task_schedule.o 
 
 C_DEPS += \
+./Core/Src/Global/Flags.d \
 ./Core/Src/Global/Task_schedule.d 
 
 
@@ -21,7 +24,7 @@ Core/Src/Global/%.o Core/Src/Global/%.su Core/Src/Global/%.cyclo: ../Core/Src/Gl
 clean: clean-Core-2f-Src-2f-Global
 
 clean-Core-2f-Src-2f-Global:
-	-$(RM) ./Core/Src/Global/Task_schedule.cyclo ./Core/Src/Global/Task_schedule.d ./Core/Src/Global/Task_schedule.o ./Core/Src/Global/Task_schedule.su
+	-$(RM) ./Core/Src/Global/Flags.cyclo ./Core/Src/Global/Flags.d ./Core/Src/Global/Flags.o ./Core/Src/Global/Flags.su ./Core/Src/Global/Task_schedule.cyclo ./Core/Src/Global/Task_schedule.d ./Core/Src/Global/Task_schedule.o ./Core/Src/Global/Task_schedule.su
 
 .PHONY: clean-Core-2f-Src-2f-Global
 

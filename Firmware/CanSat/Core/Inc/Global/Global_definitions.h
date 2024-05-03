@@ -14,6 +14,7 @@
 #include "gpio.h"
 #include "i2c.h"
 
+
 extern uint8_t test[32];
 extern uint8_t PIPE0_Addres[5];
 extern uint8_t NRF24_Cannel;
@@ -75,5 +76,7 @@ typedef union U32{
 	int32_t data;
 	uint8_t  bytes[4];
 }U32_t;
+
+void ErrorFlags_check(void);
 
 #endif /* INC_GLOBAL_GLOBAL_DEFINITIONS_H_ */

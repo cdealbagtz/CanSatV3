@@ -1,0 +1,4 @@
+../Core/Src/Global/Flags.c:18:9:BMP280_checkState	2
+../Core/Src/Global/Flags.c:25:9:NRF24_checkState	3
+../Core/Src/Global/Flags.c:33:9:mpu6050_checkState	2
+../Core/Src/Global/Flags.c:40:6:ErrorFlags_check	1

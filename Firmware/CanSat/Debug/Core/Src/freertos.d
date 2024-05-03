@@ -38,6 +38,7 @@ Core/Src/freertos.o: ../Core/Src/freertos.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h \
@@ -46,11 +47,11 @@ Core/Src/freertos.o: ../Core/Src/freertos.c \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h \
- ../Core/Inc/Global/Task_schedule.h ../Core/Inc/Peripheral/NRF24.h \
+ ../Core/Inc/Global/Task_schedule.h \
  ../Core/Inc/Global/Global_definitions.h ../Core/Inc/spi.h \
  ../Core/Inc/main.h ../Core/Inc/dma.h ../Core/Inc/gpio.h \
- ../Core/Inc/i2c.h ../Core/Inc/Peripheral/BMP280.h \
- ../Core/Inc/Peripheral/mpu6050.h
+ ../Core/Inc/i2c.h ../Core/Inc/Peripheral/NRF24.h \
+ ../Core/Inc/Peripheral/BMP280.h ../Core/Inc/Peripheral/mpu6050.h
 ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h:
 ../Core/Inc/FreeRTOSConfig.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h:
@@ -91,6 +92,7 @@ Core/Src/freertos.o: ../Core/Src/freertos.c \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h:
@@ -100,12 +102,12 @@ Core/Src/freertos.o: ../Core/Src/freertos.c \
 ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h:
 ../Core/Inc/Global/Task_schedule.h:
-../Core/Inc/Peripheral/NRF24.h:
 ../Core/Inc/Global/Global_definitions.h:
 ../Core/Inc/spi.h:
 ../Core/Inc/main.h:
 ../Core/Inc/dma.h:
 ../Core/Inc/gpio.h:
 ../Core/Inc/i2c.h:
+../Core/Inc/Peripheral/NRF24.h:
 ../Core/Inc/Peripheral/BMP280.h:
 ../Core/Inc/Peripheral/mpu6050.h:
