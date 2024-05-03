@@ -5151,9 +5151,9 @@ LOAD C:/ST/STM32CubeIDE_1.14.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .text.SystemInit
                 0x0000000008001818       0x24 ./Core/Src/system_stm32f4xx.o
                 0x0000000008001818                SystemInit
- .text.MX_USART1_UART_Init
+ .text.MX_USART6_UART_Init
                 0x000000000800183c       0x54 ./Core/Src/usart.o
-                0x000000000800183c                MX_USART1_UART_Init
+                0x000000000800183c                MX_USART6_UART_Init
  .text.HAL_UART_MspInit
                 0x0000000008001890       0x90 ./Core/Src/usart.o
                 0x0000000008001890                HAL_UART_MspInit
@@ -5680,8 +5680,8 @@ LOAD C:/ST/STM32CubeIDE_1.14.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
                 0x000000002000042c                hdma_spi1_tx
  .bss.htim11    0x000000002000048c       0x48 ./Core/Src/stm32f4xx_hal_timebase_tim.o
                 0x000000002000048c                htim11
- .bss.huart1    0x00000000200004d4       0x48 ./Core/Src/usart.o
-                0x00000000200004d4                huart1
+ .bss.huart6    0x00000000200004d4       0x48 ./Core/Src/usart.o
+                0x00000000200004d4                huart6
  .bss.uwTick    0x000000002000051c        0x4 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
                 0x000000002000051c                uwTick
  .bss.pxCurrentTCB

@@ -375,7 +375,7 @@ void NRF24_Receive(void){
 	NRF24_CheckFlags();
 	if(RX_P_NO != 7){
 		NRF24_FIFO_read(RxBuffer);
-		HAL_UART_Transmit(&huart1, RxBuffer, 32, 100);
+		HAL_UART_Transmit(&huart6, RxBuffer, 32, 100);
 	}
 }
 
