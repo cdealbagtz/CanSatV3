@@ -10,7 +10,7 @@
 
 #include "Global/Global_definitions.h"
 
-
+#include "Application/ComsRx.h"
 
 
 /*!
@@ -93,7 +93,7 @@ enum NRF24_modes{
 	Init,
 	TxMode,
 	RxMode,
-	PowerSave
+	StandBy
 };
 
 

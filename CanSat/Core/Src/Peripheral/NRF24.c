@@ -19,6 +19,7 @@ uint8_t PIPE0_Addres[5] = {0xC5,0xC5,0xC5,0xC5,0xC5};
 uint8_t NRF24_Cannel    = 0x56;
 
 uint8_t Cont_TX = 0;
+uint8_t Cont_RX = 0;
 uint8_t NRF24_mode;
 
 uint8_t TxBuffer[32];
@@ -357,38 +358,42 @@ void NRF24_init(void){
 
 
 void NRF24_Receive(void){
-	NRF24_CheckFlags();
 	if(RX_P_NO != 7){
 		NRF24_FIFO_read(RxBuffer);
+		RxDecode();
 	}
 }
 
 void NRF24_Transmit(void){
-	NRF24_CheckFlags();
 	if(MAX_RT)  NRF24_write(STATUS, 0x70);
 	if(TX_FULL) NRF24_FlushTxFIFO();
-	if(Cont_TX > 10){
-		Cont_TX = 0;
-		switch (Struct2transmit) {
-			case MainFrame:
-				Tx_MainFrame();
-				if(++Transmision_cont>=5){
-					Transmision_cont = RESET;
-					Struct2transmit = SecondaryFrame;
-				}
-				break;
-			case SecondaryFrame:
-				Tx_SecondaryFrame();
-				Struct2transmit = MainFrame;
-				break;
-			case CommandReplay:
-				Struct2transmit = MainFrame;
-				break;
-		}
-		NRF24_FIFO_write(TxBuffer, 32);
-		N_message += 1;
-		Transmision_Flag = RESET;
+	switch (Struct2transmit) {
+		case MainFrame:
+			Tx_MainFrame();
+			if(++Transmision_cont>=5){
+				Transmision_cont = RESET;
+				Struct2transmit = SecondaryFrame;
+			}
+			break;
+		case SecondaryFrame:
+			Tx_SecondaryFrame();
+			Struct2transmit = MainFrame;
+			break;
+		case CommandReplay:
+			Struct2transmit = MainFrame;
+			break;
 	}
+	NRF24_FIFO_write(TxBuffer, 32);
+	N_message += 1;
+	Transmision_Flag = 0;
+	memset(TxBuffer, RESET, sizeof(TxBuffer));
+	if(++Cont_RX > 1) NRF24_RxConfiguration();
+}
+
+
+void NRF24_StateMachine(void){
+	NRF24_CheckFlags();
+
 	switch (Transmision_Flag) {
 		case 0:
 			NRF24_Enable();
@@ -398,26 +403,27 @@ void NRF24_Transmit(void){
 			NRF24_Disable();
 			break;
 	}
-	++Cont_TX;
-}
 
 
-void NRF24_StateMachine(void){
 	switch (NRF24_mode){
 		case Init:
 			NRF24_RxConfiguration();
 			NRF24_PowerUp();
 			NRF24_ActualConfiguration();
+			NRF24_mode = StandBy;
 			break;
 		case RxMode:
 			NRF24_Receive();
+			if(++Cont_TX > 10) NRF24_TxConfiguration();
 			break;
 		case TxMode:
 			NRF24_Transmit();
 			break;
-		case PowerSave:
+		case StandBy:
+			NRF24_Receive();
 			break;
 		default:
 			NRF24_init();
 	}
+
 }

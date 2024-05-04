@@ -12,6 +12,7 @@
 
 void Tx_MainFrame(void);
 void Tx_SecondaryFrame(void);
+void Tx_CommandReplay(uint8_t Replay2Send);
 
 enum TelemetryFrames{
 	MainFrame,

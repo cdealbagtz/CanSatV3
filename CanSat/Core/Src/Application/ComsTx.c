@@ -7,6 +7,7 @@
 
 
 #include <Application/ComsTx.h>
+#include <Application/ComsRx.h>
 #include "Peripheral/mpu6050.h"
 
 
@@ -90,10 +91,18 @@ void Tx_SecondaryFrame(void){
 void Tx_CommandReplay(uint8_t Replay2Send){
 	Struct2transmit = CommandReplay;
 	switch (Replay2Send) {
-		case 1:
+		case Init_Transmision:
+			TxBuffer[0] = 0xA5;
+			TxBuffer[1] = 0x5A;
+			TxBuffer[2] = 0x01;
 
-			break;
-		default:
+
+			for (uint8_t n = 0; n < 8; ++n) {
+				CheckSum += TxBuffer[n];
+			}
+
+			TxBuffer[9]= CheckSum;
+			CheckSum = 0;
 			break;
 	}
 }

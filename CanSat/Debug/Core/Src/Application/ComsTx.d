@@ -32,7 +32,8 @@ Core/Src/Application/ComsTx.o: ../Core/Src/Application/ComsTx.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Core/Inc/spi.h ../Core/Inc/main.h ../Core/Inc/dma.h \
- ../Core/Inc/gpio.h ../Core/Inc/i2c.h ../Core/Inc/Peripheral/mpu6050.h
+ ../Core/Inc/gpio.h ../Core/Inc/i2c.h ../Core/Inc/Application/ComsRx.h \
+ ../Core/Inc/Peripheral/mpu6050.h
 ../Core/Inc/Application/ComsTx.h:
 ../Core/Inc/Peripheral/NRF24.h:
 ../Core/Inc/Global/Global_definitions.h:
@@ -71,4 +72,5 @@ Core/Src/Application/ComsTx.o: ../Core/Src/Application/ComsTx.c \
 ../Core/Inc/dma.h:
 ../Core/Inc/gpio.h:
 ../Core/Inc/i2c.h:
+../Core/Inc/Application/ComsRx.h:
 ../Core/Inc/Peripheral/mpu6050.h:

@@ -32,7 +32,7 @@ Core/Src/Peripheral/NRF24.o: ../Core/Src/Peripheral/NRF24.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Core/Inc/spi.h ../Core/Inc/main.h ../Core/Inc/dma.h \
- ../Core/Inc/gpio.h ../Core/Inc/i2c.h
+ ../Core/Inc/gpio.h ../Core/Inc/i2c.h ../Core/Inc/Application/ComsRx.h
 ../Core/Inc/Application/ComsTx.h:
 ../Core/Inc/Peripheral/NRF24.h:
 ../Core/Inc/Global/Global_definitions.h:
@@ -71,3 +71,4 @@ Core/Src/Peripheral/NRF24.o: ../Core/Src/Peripheral/NRF24.c \
 ../Core/Inc/dma.h:
 ../Core/Inc/gpio.h:
 ../Core/Inc/i2c.h:
+../Core/Inc/Application/ComsRx.h:
