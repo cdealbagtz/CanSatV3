@@ -5,8 +5,9 @@
  *      Author: cdealba
  */
 
+#include <Application/ComsTx.h>
 #include "Peripheral/NRF24.h"
-#include "Peripheral/mpu6050.h"
+#include <string.h>
 
 NRF24_Config_t NRF24_Configurations_Struct;
 uint8_t Transmision_Flag = 0;
@@ -24,16 +25,8 @@ uint8_t TxBuffer[32];
 uint8_t RxBuffer[32];
 
 uint8_t N_message, Struct2transmit, Transmision_cont;
-uint8_t CheckSum = 0;
 
-extern S32_t Temperature, Altitud;
-extern U32_t Presure;
 
-extern uint8_t ErrorFlags;
-
-extern MPU6050_t MPU6050;
-
-S32_t AngleX, AngleY;
 
 void NRF24_write(uint8_t Adr, uint8_t data){
 	Adr |= W_REGISTER;
@@ -370,96 +363,31 @@ void NRF24_Receive(void){
 	}
 }
 
-void NRF24_TxBuffer(void){
-
-
-	switch (Struct2transmit) {
-		case 0:
-			AngleX.data =  (int32_t)(MPU6050.KalmanAngleX * 100);
-			AngleY.data =  (int32_t)(MPU6050.KalmanAngleY * 100);
-
-			TxBuffer[0]  = 0xA5;
-			TxBuffer[1]  = 0x5A;
-			TxBuffer[2]  = 0x10;
-			TxBuffer[3]  = N_message;
-
-			TxBuffer[4]  = Temperature.bytes[0];
-			TxBuffer[5]  = Temperature.bytes[1];
-			TxBuffer[6]  = Temperature.bytes[2];
-			TxBuffer[7]  = Temperature.bytes[3];
-
-			TxBuffer[8]  = Altitud.bytes[0];
-			TxBuffer[9]  = Altitud.bytes[1];
-			TxBuffer[10] = Altitud.bytes[2];
-			TxBuffer[11] = Altitud.bytes[3];
-
-			TxBuffer[12] = Presure.bytes[0];
-			TxBuffer[13] = Presure.bytes[1];
-			TxBuffer[14] = Presure.bytes[2];
-			TxBuffer[15] = Presure.bytes[3];
-
-			TxBuffer[16] = AngleX.bytes[0];
-			TxBuffer[17] = AngleX.bytes[1];
-			TxBuffer[18] = AngleX.bytes[2];
-			TxBuffer[19] = AngleX.bytes[3];
-
-			TxBuffer[20] = AngleY.bytes[0];
-			TxBuffer[21] = AngleY.bytes[1];
-			TxBuffer[22] = AngleY.bytes[2];
-			TxBuffer[23] = AngleY.bytes[3];
-
-			TxBuffer[24] = 0xFF;
-			TxBuffer[25] = 0xFF;
-			TxBuffer[26] = 0xFF;
-			TxBuffer[27] = 0xFF;
-
-			TxBuffer[28] = 0x00;
-			TxBuffer[29] = 0x00;
-			TxBuffer[30] = 0x00;
-
-			for (uint8_t n = 0; n < 30; ++n) {
-				CheckSum += TxBuffer[n];
-			}
-			TxBuffer[31] = CheckSum;
-
-			CheckSum = 0;
-
-			if(++Transmision_cont>=5){
-				Transmision_cont = 0;
-				Struct2transmit = 1;
-			}
-			break;
-		case 1:
-			TxBuffer[0] = 0xA5;
-			TxBuffer[1] = 0x5A;
-			TxBuffer[2] = 0x20;
-			TxBuffer[3] = N_message;
-			for (uint8_t n = 0; n < 30; ++n) {
-				CheckSum += TxBuffer[n];
-			}
-			TxBuffer[31] = CheckSum;
-
-			CheckSum = 0;
-
-			Struct2transmit = 0;
-			break;
-		default:
-			Struct2transmit = 0;
-			break;
-	}
-
-}
-
 void NRF24_Transmit(void){
 	NRF24_CheckFlags();
 	if(MAX_RT)  NRF24_write(STATUS, 0x70);
 	if(TX_FULL) NRF24_FlushTxFIFO();
 	if(Cont_TX > 10){
-		NRF24_TxBuffer();
 		Cont_TX = 0;
+		switch (Struct2transmit) {
+			case MainFrame:
+				Tx_MainFrame();
+				if(++Transmision_cont>=5){
+					Transmision_cont = RESET;
+					Struct2transmit = SecondaryFrame;
+				}
+				break;
+			case SecondaryFrame:
+				Tx_SecondaryFrame();
+				Struct2transmit = MainFrame;
+				break;
+			case CommandReplay:
+				Struct2transmit = MainFrame;
+				break;
+		}
 		NRF24_FIFO_write(TxBuffer, 32);
 		N_message += 1;
-		Transmision_Flag = 0;
+		Transmision_Flag = RESET;
 	}
 	switch (Transmision_Flag) {
 		case 0:

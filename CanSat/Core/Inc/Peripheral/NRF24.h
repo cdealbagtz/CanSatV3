@@ -12,6 +12,7 @@
 
 
 
+
 /*!
  * @def 	SPI_NRF24
  * @brief 	Almacena el puntero a la configuración del SPI para el NF24
@@ -94,6 +95,8 @@ enum NRF24_modes{
 	RxMode,
 	PowerSave
 };
+
+
 
 void NRF24_ActualConfiguration(void);
 

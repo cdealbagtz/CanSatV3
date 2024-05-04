@@ -1,0 +1,3 @@
+../Core/Src/Application/ComsTx.c:26:6:Tx_MainFrame	16	static
+../Core/Src/Application/ComsTx.c:76:6:Tx_SecondaryFrame	16	static
+../Core/Src/Application/ComsTx.c:90:6:Tx_CommandReplay	16	static
