@@ -1,4 +1,0 @@
-../Core/Src/Global/Flags.c:18:9:BMP280_checkState	8	static
-../Core/Src/Global/Flags.c:25:9:NRF24_checkState	8	static
-../Core/Src/Global/Flags.c:33:9:mpu6050_checkState	32	static
-../Core/Src/Global/Flags.c:40:6:ErrorFlags_check	16	static
